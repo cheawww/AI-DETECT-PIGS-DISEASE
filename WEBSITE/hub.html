@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRISPR Efficiency Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F0F8FF;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CRISPR Efficiency Prediction</h1>
+        <form method="POST" action="/submit">
+            <label for="genome">Genome Assembly</label>
+            <select name="genome" id="genome">
+                <option value="hg38">Human (hg38)</option>
+                <option value="mm10">Mouse (mm10)</option>
+            </select>
+
+            <label for="region">Region (e.g., chr:100,000-101,000)</label>
+            <input type="text" id="region" name="region" placeholder="chr:100,000-101,000">
+
+            <label for="gene">Target Exons of a Gene</label>
+            <input type="text" id="gene" name="gene" placeholder="e.g., CHMP2B">
+
+            <label for="sequence">Paste Target Sequence</label>
+            <textarea id="sequence" name="sequence" rows="5" placeholder="Paste your sequence here..."></textarea>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your_email@example.com">
+
+            <label for="jobname">Job Name</label>
+            <input type="text" id="jobname" name="jobname" placeholder="crispron">
+
+            <button type="submit">Submit</button>
+        </form>
+        <p class="note">
+            By submitting, you agree to store your email and results for up to 14 days.
+        </p>
+    </div>
+</body>
+</html>

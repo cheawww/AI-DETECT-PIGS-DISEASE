@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRISPR gRNA Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F0F8FF;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        canvas {
+            margin: 20px auto;
+            display: block;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>CRISPR-Cas9 gRNA Analysis Results</h1>
+
+        <!-- Graph Section -->
+        <h2>Activity by Position</h2>
+        <canvas id="activityChart" width="800" height="400"></canvas>
+
+        <!-- Data Table Section -->
+        <div class="table-container">
+            <h2>gRNA Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>gRNA</th>
+                        <th>Position</th>
+                        <th>PAM</th>
+                        <th>Is Valid PAM</th>
+                        <th>Context</th>
+                        <th>Overlapping Genes</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Example data (replace this with dynamic loading from your CSV file or API)
+        const gRNAData = [
+            {
+                gRNA: "TGAGTAGAGTCAGTCATGGA",
+                position: 35405522,
+                pam: "GGG",
+                isValidPam: "True",
+                context: "GTAACGAAACATGCAATAGG...",
+                overlappingGenes: "THEMIS, LUZP2, RBFOX1"
+            },
+            {
+                gRNA: "GAGTAGAGTCAGTCATGGAG",
+                position: 35405523,
+                pam: "GGA",
+                isValidPam: "True",
+                context: "TAACGAAACATGCAATAGG...",
+                overlappingGenes: "THEMIS, LUZP2, RBFOX1"
+            }
+        ];
+
+        // Populate Table
+        const tableBody = document.getElementById('dataTable');
+        gRNAData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.gRNA}</td>
+                <td>${row.position}</td>
+                <td>${row.pam}</td>
+                <td>${row.isValidPam}</td>
+                <td>${row.context}</td>
+                <td>${row.overlappingGenes}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+
+        // Graph Data
+        const graphData = {
+            labels: gRNAData.map(d => d.position),
+            datasets: [{
+                label: 'Percent Active',
+                data: [75, 85], // Replace with your Percent Active values
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        };
+
+        // Render Chart
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: graphData,
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'gRNA Activity by Position'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Position'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Percent Active'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

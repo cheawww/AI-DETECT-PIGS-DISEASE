@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>CRISPR Efficiency Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F0F8FF;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            font-size: 12px;
+            color: #666;
+        }
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .loader img {
+            width: 50px;
+        }
+        .visualization {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .annotation-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .annotation-table th, .annotation-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .annotation-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        /* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 5s;
+}
+
+@keyframes fade {
+  from {opacity: .1} 
+  to {opacity: 1000}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+    </style>
+</head>
+<body>
+   
+</script>
+<div class="container">
+        <h1>Strength Improvement in Pigs with CRISPR-Cas9 and Neural Network Learning</h1>
+        
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>                        
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="research.html">Research</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <!-- Form Section -->
+        <form method="POST" action="/analyze" enctype="application/x-www-form-urlencoded">
+            <label for="genome">Genome Assembly</label>
+            <select name="genome" id="genome">
+                <option value="susScr11">Pig (susScr11)</option>
+                <option value="mm10"></option>
+            </select>
+
+            <label for="region">Region (e.g., chr:100,000-101,000)</label>
+            <input type="text" id="region" name="region" placeholder=":100,000-101,000">
+
+            <label for="gene">Target Exons of a Gene</label>
+            <input type="text" id="gene" name="gene" placeholder="e.g., CHMP2B">
+            <label for="#">Chromosome</label>
+            <select name="chrom">
+                <option value="NC_010443.5">NC_010443.5</option>
+                <option value="NC_010444.5">NC_010444.5</option>
+              </select>
+
+            <label for="sequence">Paste Target Sequence</label>
+            <textarea id="sequence" name="sequence" rows="5" placeholder="Paste your sequence here..."></textarea>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your_email@example.com">
+
+            <label for="jobname">Job Name</label>
+            <input type="text" id="jobname" name="jobname" placeholder="crispron">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <p class="note">By submitting, you agree to store your email and results for up to 14 days.</p>
+
+        <!-- Visualization Section -->
+        <button id="loadDataBtn">Load Genome Data</button>
+        <div class="loader">
+            <img src="https://i.imgur.com/6RMhx.gif" alt="Loading...">
+        </div>
+        <div class="visualization" id="visualization" style="display: none;">
+            <h3>Genome Data</h3>
+            <p id="sequenceDisplay"></p>
+            <h3>Annotations</h3>
+            <table class="annotation-table" id="annotationTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Strand</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+  </div>    
+    <script>
+        $(document).ready(function () {
+            $('#loadDataBtn').on('click', function () {
+                $('.loader').show();
+                $.post('/load_data', function (response) {
+                    if (response.status === 'success') {
+                        $('.loader').hide();
+                        $('#visualization').show();
+
+                        // Fetch genome sequence
+                        $.get('/get_sequence', { start: 0, end: 1000 }, function (seqResponse) {
+                            $('#sequenceDisplay').text(seqResponse.sequence);
+                        });
+
+                        // Fetch annotations
+                        $.get('/get_annotations', { start: 0, end: 1000 }, function (annoResponse) {
+                            const rows = annoResponse.map(row => `
+                                <tr>
+                                    <td>${row.type}</td>
+                                    <td>${row.start}</td>
+                                    <td>${row.end}</td>
+                                    <td>${row.strand}</td>
+                                </tr>
+                            `).join('');
+                            $('#annotationTable tbody').html(rows);
+                        });
+                    } else {
+                        alert('Error loading data: ' + response.message);
+                        $('.loader').hide();
+                    }
+                });
+            });
+        });
+
+       
+    </script>
+</body>
+</html>

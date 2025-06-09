@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: pyplot-cli
+Version: 0.1.1
+Summary: 
+Author: Minjoon Hong
+Author-email: mjhong0708@yonsei.ac.kr
+Requires-Python: >=3.8,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: flake8 (>=3.9.2,<4.0.0)
+Requires-Dist: matplotlib (>=3.4.3,<4.0.0)
+Requires-Dist: openpyxl (>=3.0.7,<4.0.0)
+Requires-Dist: pandas (>=1.3.1,<2.0.0)
+Requires-Dist: typer (>=0.3.2,<0.4.0)
+Requires-Dist: yapf (>=0.31.0,<0.32.0)

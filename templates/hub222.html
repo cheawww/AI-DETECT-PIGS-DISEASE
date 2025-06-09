@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Mutation Chart</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f9f9f9;
+            margin: 20px;
+        }
+        .chart {
+            white-space: pre;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        .variant {
+            color: red;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .tooltip {
+            display: inline-block;
+            position: relative;
+        }
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            top: -30px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>DNA Mutation Chart</h1>
+    <div class="chart" id="dna-chart"></div>
+
+    <script>
+        // Example data (replace this with your data fetching logic)
+        const dnaData = {
+            sequence: "cttcctttgtccccaatctgggcgcgcgccggcgccccctggcggcctaaggactcggcgcgccggaagtggccagggcgggggcgacctcggctcacagcgcgcccggctattctcgcagctc",
+            mutations: [
+                { position: 35, base: "T", type: "Substitution" },
+                { position: 52, base: "C", type: "Insertion" },
+                { position: 67, base: "G", type: "Deletion" },
+            ]
+        };
+
+        // Generate chart dynamically
+        function generateChart(data) {
+            const { sequence, mutations } = data;
+            let chart = "Position: ";
+
+            // Add position markers
+            for (let i = 0; i < sequence.length; i += 10) {
+                chart += `${i.toString().padStart(10, ' ')} `;
+            }
+            chart += "\nSequence: ";
+
+            // Add sequence with highlighted mutations
+            for (let i = 0; i < sequence.length; i++) {
+                const mutation = mutations.find(m => m.position === i);
+                if (mutation) {
+                    chart += `<span class="tooltip variant" data-tooltip="Type: ${mutation.type}, Base: ${mutation.base}">${mutation.base}</span>`;
+                } else {
+                    chart += sequence[i];
+                }
+            }
+            return chart;
+        }
+
+        // Insert chart into the page
+        const chartContainer = document.getElementById("dna-chart");
+        chartContainer.innerHTML = generateChart(dnaData);
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genome Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .track-container {
+            position: relative;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        canvas {
+            display: block;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div class="track-container" id="track1" style="height: 150px; width: 800px;">
+    <canvas id="track1-canvas" width="800" height="150"></canvas>
+</div>
+
+<div class="track-container" id="track2" style="height: 100px; width: 800px;">
+    <canvas id="track2-canvas" width="800" height="100"></canvas>
+</div>
+
+<div class="track-container" id="track3" style="height: 75px; width: 800px;">
+    <canvas id="track3-canvas" width="800" height="75"></canvas>
+</div>
+
+<script>
+    // Function to draw a track
+    function drawTrack(canvasId, data, color, heightScale) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext("2d");
+
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Set styles
+        ctx.fillStyle = color;
+
+        // Draw rectangles to simulate coverage
+        const barWidth = canvas.width / data.length;
+        data.forEach((value, index) => {
+            const barHeight = value * heightScale;
+            const x = index * barWidth;
+            const y = canvas.height - barHeight;
+            ctx.fillRect(x, y, barWidth, barHeight);
+        });
+    }
+
+    // Simulated data for each track
+    const track1Data = Array.from({ length: 100 }, () => Math.random());
+    const track2Data = Array.from({ length: 100 }, () => Math.random() * 0.8);
+    const track3Data = Array.from({ length: 100 }, () => Math.random() * 0.6);
+
+    // Draw all tracks
+    drawTrack("track1-canvas", track1Data, "#007bff", 100);
+    drawTrack("track2-canvas", track2Data, "#28a745", 100);
+    drawTrack("track3-canvas", track3Data, "#ffc107", 100);
+</script>
+
+</body>
+</html>
+
+
+
+

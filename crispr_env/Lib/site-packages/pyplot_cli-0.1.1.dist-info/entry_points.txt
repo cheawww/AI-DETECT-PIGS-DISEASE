@@ -1,0 +1,3 @@
+[console_scripts]
+pyplt=pyplot_cli.cli:run
+
