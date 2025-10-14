@@ -20,10 +20,7 @@ print(f"Target Sequence: {target_seq[:100]}...")  # Preview first 100 bases
 
 import pandas as pd
 
-# Load the GFF file
 gff_file = "GCF_000003025.6_Sscrofa11.1_genomic.gff"
-
-# Read GFF as a tabular file
 gff_data = pd.read_csv(
     gff_file,
     sep="\t",
@@ -32,14 +29,11 @@ gff_data = pd.read_csv(
     names=["seqname", "source", "feature", "start", "end", "score", "strand", "frame", "attributes"]
 )
 
-# Filter for features of interest (e.g., "gene" or "CDS")
 features_of_interest = gff_data[gff_data["feature"].isin(["gene", "CDS"])]
 print(features_of_interest.head())  # Preview extracted regions
 
-# Example gRNA positions (replace these with your actual gRNA results)
 gRNA_positions = [110468283, 3099452, 164620117, 24584244, 3347057]
 
-# Check if any gRNA overlaps with the features in the GFF file
 for gRNA_pos in gRNA_positions:
     overlaps = features_of_interest[
         (features_of_interest["start"] <= gRNA_pos) & 
@@ -54,18 +48,15 @@ for gRNA_pos in gRNA_positions:
 
 
     from Bio import SeqIO
-
-# Load the FNA file
+    
 fna_file = "GCF_000003025.6_Sscrofa11.1_genomic.fna"
 record = SeqIO.read(fna_file, "fasta")
 
-# Define a function to extract sequence around gRNA position
 def extract_region(seq, position, window=20):
     start = max(0, position - window)  # Prevent negative indexing
     end = position + window
     return seq[start:end]
 
-# Extract sequences for each gRNA
 for gRNA_pos in gRNA_positions:
     extracted_seq = extract_region(record.seq, gRNA_pos, window=20)
     print(f"Sequence around gRNA at {gRNA_pos}: {extracted_seq}")
