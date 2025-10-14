@@ -3,10 +3,6 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def generate_grna(sequence, pam="NGG"):
-    """
-    Function to generate gRNAs from the given sequence.
-    Looks for PAM sites (default: NGG for SpCas9).
-    """
     sequence = sequence.upper()
     grna_list = []
     
@@ -33,11 +29,9 @@ def analyze():
     sequence = request.form.get("sequence")
     email = request.form.get("email")
     jobname = request.form.get("jobname")
-
-    # Generate gRNAs from the sequence
     grna_list = generate_grna(sequence)
-
-    # Render hub2.html with gRNA data
+    
+    # Render hub2.html
     return render_template(
         "hub2.html",
         genome=genome,
