@@ -5,10 +5,8 @@ import re
 fna_file = "data/GCF_000003025.6_Sscrofa11.1_genomic.fna"
 gff_file = "data/GCF_000003025.6_Sscrofa11.1_genomic.gff"
 
-# Load genome sequences into a dictionary
 genome = {record.id: record.seq for record in SeqIO.parse(fna_file, "fasta")}
 
-# Function to extract gRNAs with NGG PAM
 def find_gRNAs(sequence, pam="NGG", gRNA_length=20):
     gRNAs = []
     pam_regex = pam.replace("N", ".")
@@ -19,7 +17,6 @@ def find_gRNAs(sequence, pam="NGG", gRNA_length=20):
             gRNAs.append((str(gRNA), pam_start - gRNA_length))
     return gRNAs
 
-# Parse GFF file and find gRNAs for each gene
 with open(gff_file) as gff:
     for line in gff:
         if not line.startswith("#"):
