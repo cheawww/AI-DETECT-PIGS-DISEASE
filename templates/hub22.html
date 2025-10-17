@@ -51,11 +51,9 @@
     <div class="container">
         <h1>CRISPR-Cas9 gRNA Analysis Results</h1>
 
-        <!-- Graph Section -->
         <h2>Activity by Position</h2>
         <canvas id="activityChart" width="800" height="400"></canvas>
 
-        <!-- Data Table Section -->
         <div class="table-container">
             <h2>gRNA Data</h2>
             <table>
@@ -70,14 +68,12 @@
                     </tr>
                 </thead>
                 <tbody id="dataTable">
-                    <!-- Data will be inserted here -->
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        // Example data (replace this with dynamic loading from your CSV file or API)
         const gRNAData = [
             {
                 gRNA: "TGAGTAGAGTCAGTCATGGA",
@@ -97,7 +93,6 @@
             }
         ];
 
-        // Populate Table
         const tableBody = document.getElementById('dataTable');
         gRNAData.forEach(row => {
             const tr = document.createElement('tr');
@@ -112,7 +107,6 @@
             tableBody.appendChild(tr);
         });
 
-        // Graph Data
         const graphData = {
             labels: gRNAData.map(d => d.position),
             datasets: [{
@@ -125,7 +119,6 @@
             }]
         };
 
-        // Render Chart
         const ctx = document.getElementById('activityChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
