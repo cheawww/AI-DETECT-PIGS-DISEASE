@@ -48,7 +48,6 @@
     <div class="chart" id="dna-chart"></div>
 
     <script>
-        // Example data (replace this with your data fetching logic)
         const dnaData = {
             sequence: "cttcctttgtccccaatctgggcgcgcgccggcgccccctggcggcctaaggactcggcgcgccggaagtggccagggcgggggcgacctcggctcacagcgcgcccggctattctcgcagctc",
             mutations: [
@@ -58,18 +57,15 @@
             ]
         };
 
-        // Generate chart dynamically
         function generateChart(data) {
             const { sequence, mutations } = data;
             let chart = "Position: ";
 
-            // Add position markers
             for (let i = 0; i < sequence.length; i += 10) {
                 chart += `${i.toString().padStart(10, ' ')} `;
             }
             chart += "\nSequence: ";
 
-            // Add sequence with highlighted mutations
             for (let i = 0; i < sequence.length; i++) {
                 const mutation = mutations.find(m => m.position === i);
                 if (mutation) {
@@ -81,7 +77,6 @@
             return chart;
         }
 
-        // Insert chart into the page
         const chartContainer = document.getElementById("dna-chart");
         chartContainer.innerHTML = generateChart(dnaData);
     </script>
@@ -128,18 +123,13 @@
 </div>
 
 <script>
-    // Function to draw a track
     function drawTrack(canvasId, data, color, heightScale) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext("2d");
 
-        // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Set styles
         ctx.fillStyle = color;
-
-        // Draw rectangles to simulate coverage
+        
         const barWidth = canvas.width / data.length;
         data.forEach((value, index) => {
             const barHeight = value * heightScale;
@@ -149,12 +139,9 @@
         });
     }
 
-    // Simulated data for each track
     const track1Data = Array.from({ length: 100 }, () => Math.random());
     const track2Data = Array.from({ length: 100 }, () => Math.random() * 0.8);
     const track3Data = Array.from({ length: 100 }, () => Math.random() * 0.6);
-
-    // Draw all tracks
     drawTrack("track1-canvas", track1Data, "#007bff", 100);
     drawTrack("track2-canvas", track2Data, "#28a745", 100);
     drawTrack("track3-canvas", track3Data, "#ffc107", 100);
