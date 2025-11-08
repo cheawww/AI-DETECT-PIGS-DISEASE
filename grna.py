@@ -1,7 +1,5 @@
 from Bio import SeqIO
 import re
-
-# Files
 fna_file = "data/GCF_000003025.6_Sscrofa11.1_genomic.fna"
 gff_file = "data/GCF_000003025.6_Sscrofa11.1_genomic.gff"
 
