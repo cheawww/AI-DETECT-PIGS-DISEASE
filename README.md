@@ -1,3 +1,3 @@
 ﻿# AI-DETECT-PIGS-DISEASE
 
-![](Strength Improvement in Pigs with CRISPR-Cas9 and Neural Network Learning.pdf.png)
+![alt text](image-url)
